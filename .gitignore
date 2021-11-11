@@ -1,0 +1,9 @@
+# Editor directories and files
+production.env
+development.env
+main
+.circleci/config_local.yml
+.DS_Store
+go-lambda-api-demo
+launch.json
+.vscode
