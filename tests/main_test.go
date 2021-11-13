@@ -1,22 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
-	"os"
-	"testing"
-	"log"
-	"github.com/joho/godotenv"
+  "fmt"
+  "net/http"
+  "net/http/httptest"
+  "os"
+  "testing"
+  "log"
+  "github.com/joho/godotenv"
 
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
+  "github.com/gin-gonic/gin"
+  "github.com/stretchr/testify/assert"
 
-	// MySQL用ドライバ
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm"
-		"go-lambda-api-demo/src/infrastructure"
+  "go-lambda-api-demo/src/infrastructure"
 )
 
 func TestMain(m *testing.M) {
