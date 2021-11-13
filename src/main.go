@@ -36,7 +36,6 @@ func main() {
 			log.Fatal(err)
 		}
 
-		//db := infrastructure.NewDB()
 		r := infrastructure.NewRouting()
 		infrastructure.Run(r)
 	}

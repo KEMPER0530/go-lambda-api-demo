@@ -36,10 +36,12 @@ func (r *Routing) setRouting() {
 	// CORS設定
 	r.Gin.Use(setCors())
 
+	// dynamoDB接続
+	d := NewDB()
 	// コントローラーの設定
-	demoController := controllers.NewDemoController(NewDB())
+	PCController := controllers.NewPCController()
 	// RDSにアクセスして接続確認を行う
-	r.Gin.GET("/V1/actuator-health", func (c *gin.Context) { demoController.Healthcheck(c) })
+	r.Gin.GET("/V1/actuator-health", func (c *gin.Context) { PCController.Healthcheck(c,d) })
 
 }
 
