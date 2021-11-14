@@ -60,7 +60,7 @@ jobs:
                --package-type Image \
                --code ImageUri=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}@${DIGEST} \
                --region ${AWS_REGION} \
-               --environment "Variables={PORT=${PORT}}" \
+               --environment "Variables={GO_ENV="production",PORT=${PORT}}" \
                --role ${AWS_LAMBDA_ROLE}
             else
               aws lambda update-function-code \
