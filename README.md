@@ -2,8 +2,12 @@
 
 # go-lambda-api-demo
 
-Go 言語で作成した API をコンテナイメージとして Lambda 上で動かすサンプルです。
-APIGateway→Lambda→DB から値を取得してステータスを返却します。
+![go-lambda-api-demo](https://user-images.githubusercontent.com/43329853/142201779-72293879-e582-4ddb-8f99-daa04bdb58a4.png)
+
+サンプルは「API Gateway」 + 「Lambda」で作成したAPIとなります。
+APIGatewayで作成したREST APIにリクエストを投げてdynamoDBへ接続できるかどうかを確認します。
+
+Go言語で作成し、コンテナイメージとしてLambda上で動作します。
 
 # Requirement
 
@@ -12,14 +16,23 @@ APIGateway→Lambda→DB から値を取得してステータスを返却しま�
 
 # Usage
 
-AWS にて APIGateway を作成し下記を実行
+ 1. dynamoDBの作成(data配下のサンプルを利用してテーブルを作成)
+ 2. Lambdaへ本プログラムをデプロイ
+ 3. APIGatewayの作成
+ 4. Curlの実行
 
 ```
-@@@@@@@
+# 例
+curl -X GET https://XXXXXXXXXXXXXX.execute-api.ap-northeast-1.amazonaws.com/dev/V1/actuator-health | jq
+
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   101  100   101    0     0    878      0 --:--:-- --:--:-- --:--:--   885
+{
+  "Code": 200,
+  "DBSts": "CONNECTED",
+  "Time": "2021-11-17T21:40:38.442062149+09:00",
+  "Host": "XXX.XXX.XX.XXXX"
+}
+
 ```
-
-@@@@@@@
-
-# Note
-
-別途、APIGateway と DB を構築する必要があります。
