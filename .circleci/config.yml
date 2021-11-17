@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.15.3
   aws-cli: circleci/aws-cli@2.0
+  go: circleci/go@1.7.0
 workflows:
   version: 2
   test_and_build_and_deploy:
@@ -25,23 +26,19 @@ workflows:
               only: main
 jobs:
   test:
-    docker:
-      - image: circleci/golang:1.17.2
-    working_directory: ~/go/src/test
+    executor:
+      name: go/default
+      tag: '1.17'
     steps:
       - checkout
-      - run:
-          name: update rootCA
-          command: sudo apt-get --allow-releaseinfo-change update && sudo apt upgrade -y && sudo apt-get install golang
-      - run:
-          name: Go get library
-          command: go get -v -t -d ./...
-      - run:
-          name: Env Setup
-          command: echo 'export PATH=/go/bin/:${PATH}' >> $BASH_ENV
-      - run:
-          name: Run Test
-          command: GO_ENV=production go test -cover -v ./tests
+      - go/load-cache
+      - go/mod-download
+      - go/save-cache
+      - go/test:
+          packages: ./tests
+          covermode: atomic
+          failfast: true
+          race: true
   aws-lambda-deploy:
     executor: aws-cli/default
     steps:
